@@ -1245,7 +1245,7 @@ def reconstruction(args):
             ray_type=args.ray_type,
         )
 
-        if iteration >= args.upsamp_list[3]:
+        if iteration >= args.upsamp_list[-1]:
             # skewed mask loss
             clamped_mask_rand = torch.clamp(
                 dynamicness_map_rand, min=1e-6, max=1.0 - 1e-6
@@ -1346,7 +1346,7 @@ def reconstruction(args):
                 "train/mask_loss", mask_loss.detach().item(), global_step=iteration
             )
 
-        if iteration >= args.upsamp_list[3]:
+        if iteration >= args.upsamp_list[-1]:
             # skewed mask loss
             clamped_mask = torch.clamp(dynamicness_map, min=1e-6, max=1.0 - 1e-6)
             skewed_mask_loss = torch.mean(
@@ -2591,7 +2591,7 @@ def reconstruction(args):
                 lr_scale = 1  # 0.1 ** (iteration / args.n_iters)
                 if args.optimize_poses:
                     optimizer_pose.param_groups[0]["lr"] = lr_pose
-                if iteration >= args.upsamp_list[3] and args.optimize_focal_length:
+                if iteration >= args.upsamp_list[-1] and args.optimize_focal_length:
                     optimizer_focal.param_groups[0]["lr"] = lr_pose
             else:
                 lr_scale = args.lr_decay_target_ratio ** (iteration / args.n_iters)
