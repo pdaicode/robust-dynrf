@@ -17,6 +17,7 @@ conda create -n RoDynRF python=3.8 -y
 conda activate RoDynRF
 pip install torch torchvision
 pip install tqdm scikit-image opencv-python configargparse lpips imageio-ffmpeg kornia lpips tensorboard imageio easydict matplotlib scipy plyfile timm
+pip install Pillow==9.5.0
 ```
 
 ## Dataset
